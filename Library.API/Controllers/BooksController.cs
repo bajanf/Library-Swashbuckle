@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Library.API.Controllers
 {
+    [Produces("application/json")]
     [Route("api/authors/{authorId}/books")]
     [ApiController]
     // set up response type at controller level in order to not mention them for each action,
