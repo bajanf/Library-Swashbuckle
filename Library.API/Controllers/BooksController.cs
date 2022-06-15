@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Library.API.Models;
 using Library.API.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,11 @@ namespace Library.API.Controllers
 {
     [Route("api/authors/{authorId}/books")]
     [ApiController]
+    // set up response type at controller level in order to not mention them for each action,
+    // !!!a global one can be set in Startup.cs -> ConfigureServices > .AddMvc
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status406NotAcceptable)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public class BooksController : ControllerBase
     { 
         private readonly IBookRepository _bookRepository;
@@ -27,6 +33,9 @@ namespace Library.API.Controllers
         }
        
         [HttpGet()]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<IEnumerable<Book>>> GetBooks(
         Guid authorId )
         {
@@ -38,7 +47,15 @@ namespace Library.API.Controllers
             var booksFromRepo = await _bookRepository.GetBooksAsync(authorId); 
             return Ok(_mapper.Map<IEnumerable<Book>>(booksFromRepo));
         }
-
+        /// <summary>
+        /// Gets a book by id for a specific author
+        /// </summary>
+        /// <param name="authorId">The id of the book author</param>
+        /// <param name="bookId">The id of the book</param>
+        /// <returns>An action Result of type Book</returns>
+        /// <response code = "200">Returns the requested book</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{bookId}")]
         public async Task<ActionResult<Book>> GetBook(
             Guid authorId,
