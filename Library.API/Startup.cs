@@ -40,7 +40,12 @@ namespace Library.API
                 //setupAction.Filters.Add(
                 //    new ProducesResponseTypeAttribute(StatusCodes.Status400BadRequest));
 
+                // if ReturnHttpNotAcceptable is false or is missing
+                // not ok because we can constrain  [Produces] annotation to a specific type => ignore the specified Accept headers for responses
+                //imagine a site that suport only application/xml type will crush after the server sends the format in json => set allways to true
                 setupAction.ReturnHttpNotAcceptable = true;
+
+                setupAction.OutputFormatters.Add(new XmlSerializerOutputFormatter());
 
                 var jsonOutputFormatter = setupAction.OutputFormatters
                     .OfType<JsonOutputFormatter>().FirstOrDefault();
