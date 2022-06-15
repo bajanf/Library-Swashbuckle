@@ -32,13 +32,13 @@ namespace Library.API
             services.AddMvc(setupAction =>
             {
                 //set up response type globably in order to not mention them in every controller
-                //!!!be carefull, those overrides the DefaultApiConventions annotations if are any
-                setupAction.Filters.Add(
-                    new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
-                setupAction.Filters.Add(
-                    new ProducesResponseTypeAttribute(StatusCodes.Status406NotAcceptable));
-                setupAction.Filters.Add(
-                    new ProducesResponseTypeAttribute(StatusCodes.Status400BadRequest));
+                //!!!be carefull, those overrides the DefaultApiConventions/CustomConvestions annotations if are any
+                //setupAction.Filters.Add(
+                //    new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
+                //setupAction.Filters.Add(
+                //    new ProducesResponseTypeAttribute(StatusCodes.Status406NotAcceptable));
+                //setupAction.Filters.Add(
+                //    new ProducesResponseTypeAttribute(StatusCodes.Status400BadRequest));
 
                 setupAction.ReturnHttpNotAcceptable = true;
 

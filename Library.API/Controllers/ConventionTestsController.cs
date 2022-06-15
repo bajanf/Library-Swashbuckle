@@ -27,7 +27,9 @@ namespace Library.API.Controllers
 
         // POST api/<ConventionTestsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [ApiConventionMethod(typeof(CustomConventions),
+            nameof(CustomConventions.Insert))]
+        public void Insert([FromBody] string value)
         {
         }
 
