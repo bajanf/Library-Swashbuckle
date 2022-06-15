@@ -87,7 +87,19 @@ namespace Library.API
                     new Microsoft.OpenApi.Models.OpenApiInfo()
                     {
                         Title = "Library API",
-                        Version = "v1"
+                        Version = "v1",
+                        Description = "Throught this API you can access authors and their books.",
+                        Contact = new Microsoft.OpenApi.Models.OpenApiContact()
+                        {
+                            Email ="flavia.bajan@gamil.com",
+                            Name ="Flavia Demo",
+                            Url =  new Uri ("https://github.com/bajanf"),
+                        },
+                        License =new Microsoft.OpenApi.Models.OpenApiLicense() 
+                        { 
+                            Name = "MIT License",
+                            Url=new Uri("https://opensource.org/licenses/MIT")
+                        }
                     }
                     );
 
