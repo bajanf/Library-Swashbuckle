@@ -39,6 +39,15 @@
             <returns>An action Result of type Book</returns>
             <response code = "200">Returns the requested book</response>
         </member>
+        <member name="M:Library.API.Controllers.BooksController.GetBookWithConcatenatedAuthorName(System.Guid,System.Guid)">
+            <summary>
+            Gets a book by id for a specific author
+            </summary>
+            <param name="authorId">The id of the book author</param>
+            <param name="bookId">The id of the book</param>
+            <returns>An action Result of type BookWithConcatenatedAuthorName</returns>
+            <response code = "200">Returns the requested BookWithConcatenatedAuthorName</response>
+        </member>
         <member name="M:Library.API.Controllers.BooksController.CreateBook(System.Guid,Library.API.Models.BookForCreation)">
             <summary>
             Create a book for a specific author

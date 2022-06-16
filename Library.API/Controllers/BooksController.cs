@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Library.API.Attributes;
 using Library.API.Models;
 using Library.API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -58,6 +60,10 @@ namespace Library.API.Controllers
         /// <response code = "200">Returns the requested book</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Produces("application/vnd.marvin.book+json")]
+        [RequestHeaderMatchesMediaTypeAttribute(HeaderNames.Accept,
+            "application/json", 
+            "application/vnd.marvin.book+json")]
         [HttpGet("{bookId}")]
         public async Task<ActionResult<Book>> GetBook(
             Guid authorId,
@@ -75,6 +81,39 @@ namespace Library.API.Controllers
             }
 
             return Ok(_mapper.Map<Book>(bookFromRepo));
+        }
+
+        /// <summary>
+        /// Gets a book by id for a specific author
+        /// </summary>
+        /// <param name="authorId">The id of the book author</param>
+        /// <param name="bookId">The id of the book</param>
+        /// <returns>An action Result of type BookWithConcatenatedAuthorName</returns>
+        /// <response code = "200">Returns the requested BookWithConcatenatedAuthorName</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Produces("application/vnd.marvin.bookWithConcatenatedAuthorName+json")]
+        [RequestHeaderMatchesMediaTypeAttribute(HeaderNames.Accept,
+            "application/json",
+            "application/vnd.marvin.bookWithConcatenatedAuthorName+json")]
+        [ApiExplorerSettings(IgnoreApi = true)] 
+        [HttpGet("{bookId}")]
+        public async Task<ActionResult<BookWithConcatenatedAuthorName>> GetBookWithConcatenatedAuthorName(
+            Guid authorId,
+            Guid bookId)
+        {
+            if (!await _authorRepository.AuthorExistsAsync(authorId))
+            {
+                return NotFound();
+            }
+
+            var bookFromRepo = await _bookRepository.GetBookAsync(authorId, bookId);
+            if (bookFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<BookWithConcatenatedAuthorName>(bookFromRepo));
         }
 
         /// <summary>
