@@ -45,7 +45,7 @@ namespace Library.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("da2fd609-d754-4feb-8acd-c4f9ff13ba96"),
+                            Id = new Guid("c"),
                             FirstName = "Stephen",
                             LastName = "Fry"
                         },

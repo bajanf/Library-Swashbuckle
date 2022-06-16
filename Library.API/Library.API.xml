@@ -57,6 +57,15 @@
             <returns>An AcctionResult of type Book</returns>
             <response code="422">Validation error</response>
         </member>
+        <member name="M:Library.API.Controllers.BooksController.CreateBookWithAmountOfPages(System.Guid,Library.API.Models.BookForCreationWithAmountOfPages)">
+            <summary>
+            Create a book for a specific author
+            </summary>
+            <param name="authorId">The id of the book author</param>
+            <param name="bookForCreationWithAmountOfPages">The book to create</param>
+            <returns>An AcctionResult of type Book</returns>
+            <response code="422">Validation error</response>
+        </member>
         <member name="T:Library.API.Models.Author">
             <summary>
             An author with Id, FirstName and LastName fields
