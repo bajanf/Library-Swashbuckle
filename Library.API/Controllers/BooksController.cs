@@ -92,10 +92,10 @@ namespace Library.API.Controllers
         /// <response code = "200">Returns the requested BookWithConcatenatedAuthorName</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [Produces("application/vnd.marvin.bookWithConcatenatedAuthorName+json")]
+        [Produces("application/vnd.marvin.bookwithconcatenatedauthorname+json")]
         [RequestHeaderMatchesMediaTypeAttribute(HeaderNames.Accept,
             "application/json",
-            "application/vnd.marvin.bookWithConcatenatedAuthorName+json")]
+            "application/vnd.marvin.bookwithconcatenatedauthorname+json")]
         [ApiExplorerSettings(IgnoreApi = true)] 
         [HttpGet("{bookId}")]
         public async Task<ActionResult<BookWithConcatenatedAuthorName>> GetBookWithConcatenatedAuthorName(
