@@ -98,12 +98,12 @@ namespace Library.API
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc(
-                    "OpenAPISpec",
+                    "OpenAPISpecAuthors",
                     new Microsoft.OpenApi.Models.OpenApiInfo()
                     {
-                        Title = "Library API",
+                        Title = "Library API (Authors)",
                         Version = "v1",
-                        Description = "Throught this API you can access authors and their books.",
+                        Description = "Throught this API you can access authors.",
                         Contact = new Microsoft.OpenApi.Models.OpenApiContact()
                         {
                             Email ="flavia.bajan@gamil.com",
@@ -115,8 +115,27 @@ namespace Library.API
                             Name = "MIT License",
                             Url=new Uri("https://opensource.org/licenses/MIT")
                         }
-                    }
-                    );
+                    });
+
+                setupAction.SwaggerDoc(
+                    "OpenAPISpecBooks",
+                    new Microsoft.OpenApi.Models.OpenApiInfo()
+                    {
+                        Title = "Library API (Books)",
+                        Version = "v1",
+                        Description = "Throught this API you can access Books.",
+                        Contact = new Microsoft.OpenApi.Models.OpenApiContact()
+                        {
+                            Email = "flavia.bajan@gamil.com",
+                            Name = "Flavia Demo",
+                            Url = new Uri("https://github.com/bajanf"),
+                        },
+                        License = new Microsoft.OpenApi.Models.OpenApiLicense()
+                        {
+                            Name = "MIT License",
+                            Url = new Uri("https://opensource.org/licenses/MIT")
+                        }
+                    });
 
                 //setupAction.ResolveConflictingActions(apiDescriptions =>
                 //{
@@ -159,8 +178,11 @@ namespace Library.API
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint(
-                    "/swagger/OpenAPISpec/swagger.json", 
-                    "Library API");
+                    "/swagger/OpenAPISpecAuthors/swagger.json",
+                    "Library API (Authors)");
+                c.SwaggerEndpoint(
+                    "/swagger/OpenAPISpecBooks/swagger.json",
+                    "Library API (Books)");
                 c.RoutePrefix = ""; //sets the endpoint of documentation at root
             });
 

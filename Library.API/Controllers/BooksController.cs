@@ -14,6 +14,7 @@ namespace Library.API.Controllers
    
     [Produces("application/json","application/xml")]
     [Route("api/authors/{authorId}/books")]
+    [ApiExplorerSettings(GroupName = "OpenAPISpecBooks")]
     [ApiController]
     // set up response type at controller level in order to not mention them for each action,
     // !!!a global one can be set in Startup.cs -> ConfigureServices > .AddMvc

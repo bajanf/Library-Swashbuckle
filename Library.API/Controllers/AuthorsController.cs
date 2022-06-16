@@ -12,6 +12,7 @@ namespace Library.API.Controllers
 {
 
     [Route("api/authors")]
+    [ApiExplorerSettings(GroupName = "OpenAPISpecAuthors")]
     [ApiController]
     public class AuthorsController : ControllerBase
     {
